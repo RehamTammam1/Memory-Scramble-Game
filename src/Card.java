@@ -14,5 +14,8 @@ public class Card {
         }
         return cardList;
     }
+    public createCards(int rowsNum,int coulumnNum){
+
+    }
 
 }

@@ -43,11 +43,8 @@ public class MemoryGameApp extends JFrame {
                 if (!boarder.checkBoarderSize(rowsValue,columnsValue)) {
                     JOptionPane.showMessageDialog(null, "Boarder Size should be even");
                 }else{
-                    boarder.createBorader();
+                    boarder.createBorader(frame,true);
                 }
-
-
-
             }
         });
 
