@@ -3,12 +3,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MemoryGameApp extends JFrame {
     public static void main (String[] args) {
 
         // Memory Game app
         JFrame frame;
+        private Map<String, Card> cards;
         Boarder boarder = new Boarder();
         JTextField numberOfrows = new JTextField();
         JTextField numberOfColumns = new JTextField();
@@ -37,16 +40,20 @@ public class MemoryGameApp extends JFrame {
                 // Retrieve input value from text field
                 int rowsValue = Integer.parseInt(numberOfrows.getText());
                 int columnsValue = Integer.parseInt(numberOfColumns.getText());
-                // Display input value
-            //    JOptionPane.showMessageDialog(frame, "Input value: " + rowsValue);
-
                 if (!boarder.checkBoarderSize(rowsValue,columnsValue)) {
                     JOptionPane.showMessageDialog(null, "Boarder Size should be even");
                 }else{
                     boarder.createBorader(frame,true);
+                    //Create a array of cards
+
                 }
             }
+            //on cliking any of the buttons
+
+
         });
 
+    Card c1= new Card("red","blue");
+    c1.showCard();
     }
 }

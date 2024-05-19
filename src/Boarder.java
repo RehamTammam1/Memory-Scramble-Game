@@ -17,6 +17,6 @@ public class Boarder {
         frame.pack(); // Adjust the frame size to fit the preferred size of its components
         frame.revalidate();
         frame.repaint();
-
     }
+
 }
