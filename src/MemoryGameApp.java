@@ -37,13 +37,15 @@ public class MemoryGameApp extends JFrame {
         panel.add(timerLabel);
         panel.add(timerinput);
         panel.add(enterBtn);
-        // Retrieve input value from text field
+
 
         enterBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Retrieve input value from text field
                 int rowsValue = Integer.parseInt(numberOfrows.getText());
                 int columnsValue = Integer.parseInt(numberOfColumns.getText());
+                int timerValue = Integer.parseInt(timerinput.getText());
                 int totalCards = rowsValue * columnsValue;
                 if (!boarder.checkBoarderSize(rowsValue, columnsValue)) {
                     JOptionPane.showMessageDialog(null, "Boarder Size should be even");
@@ -53,11 +55,10 @@ public class MemoryGameApp extends JFrame {
                     //Create a array of cards
                     CardsManger manger = new CardsManger();
                     Card[] cards = manger.createCardsCollection(rowsValue, columnsValue, totalCards, frame);
-
-
+                    //Create a Timer
+                    GameTimer timer = new GameTimer(timerValue);
                 }
             }
-
         });
     }
 }
