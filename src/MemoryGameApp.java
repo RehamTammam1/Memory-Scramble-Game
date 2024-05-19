@@ -53,8 +53,15 @@ public class MemoryGameApp extends JFrame {
                     //Create a boarder
                     boarder.createBorader(frame, true);
                     //Create a array of cards
-                    CardsManger manger = new CardsManger();
-                    Card[] cards = manger.createCardsCollection(rowsValue, columnsValue, totalCards, frame);
+                    CardsManger manger = new CardsManger(rowsValue,columnsValue);
+                    Card[] cards = manger.createCardsCollection(totalCards);
+                    //create cards buttons
+                    manger.createCardsbuttons(cards,frame);
+
+                    for (Card card : cards) {
+                        System.out.println(card.getCardValue());
+                    }
+
                     //Create a Timer
                     GameTimer timer = new GameTimer(timerValue);
                 }
