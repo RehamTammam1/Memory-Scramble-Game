@@ -18,27 +18,22 @@ public class MemoryGameApp extends JFrame {
         numberOfrows.setPreferredSize(new Dimension(100, 30));
         numberOfColumns.setPreferredSize(new Dimension(100, 30));
         timerinput.setPreferredSize(new Dimension(100, 30));
-        JButton enterBtn = new JButton("Enter");
-        frame = new JFrame("Welcome to Memory Game");
-        frame.setVisible(true);
-        frame.setSize(500, 500);
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+        //Labels
         JLabel columnLabel = new JLabel("Columns");
         JLabel rowLabel = new JLabel("Rows");
         JLabel timerLabel = new JLabel("Timer");
-
+        JButton enterBtn = new JButton("Enter");
+        frame = new JFrame("Welcome to Memory Game");
+        //Create a panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        frame.setVisible(true);
+        frame.setSize(500, 500);
         frame.add(panel);
-        panel.add(columnLabel);
-        panel.add(numberOfColumns);
-        panel.add(rowLabel);
-        panel.add(numberOfrows);
-        panel.add(timerLabel);
-        panel.add(timerinput);
-        panel.add(enterBtn);
-
-
+        Component[] panelCompments={columnLabel,numberOfColumns,rowLabel,numberOfrows,timerLabel,timerinput,enterBtn};
+        for(Component labelComponet : panelCompments){
+            panel.add(labelComponet);
+        }
         enterBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
