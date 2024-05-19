@@ -9,7 +9,7 @@ public class Card {
     private String cardValue ;
     private String cardView ;
     // Card Constructor
-    public Card(String cardValue, String cardView) {
+    public Card(String cardViewString,String cardValue) {
         this.cardValue = cardValue;
         this.cardView = cardView;
     }
@@ -48,4 +48,4 @@ public class Card {
 
     }
 
-}
+
