@@ -30,7 +30,7 @@ public class MemoryGameApp extends JFrame {
         frame.setVisible(true);
         frame.setSize(500, 500);
         frame.add(panel);
-        Component[] panelCompments={columnLabel,numberOfColumns,rowLabel,numberOfrows,timerLabel,timerinput,enterBtn};
+        Component[] panelCompments={rowLabel,numberOfrows,columnLabel,numberOfColumns,timerLabel,timerinput,enterBtn};
         for(Component labelComponet : panelCompments){
             panel.add(labelComponet);
         }
@@ -38,12 +38,31 @@ public class MemoryGameApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Retrieve input value from text field
-                int rowsValue = Integer.parseInt(numberOfrows.getText());
-                int columnsValue = Integer.parseInt(numberOfColumns.getText());
+                String rowsInput =numberOfrows.getText().trim();
+                String columnsInput = numberOfColumns.getText().trim();
+                String timerInput = timerinput.getText().trim();
+                if(rowsInput.isEmpty() ){
+                    JOptionPane.showMessageDialog(null,"Please Enter a row Value" );
+                    return;
+                }
+                if(columnsInput.isEmpty() ){
+                    JOptionPane.showMessageDialog(null,"Please Enter a column Value" );
+                    return;
+                }
+                if(timerInput.isEmpty() ){
+                    JOptionPane.showMessageDialog(null,"Please Enter a Timer Value" );
+                    return;
+                }
+
+
+                int rowsValue = Integer.parseInt(rowsInput);
+                int columnsValue = Integer.parseInt(columnsInput);
                 int timerValue = Integer.parseInt(timerinput.getText());
                 int totalCards = rowsValue * columnsValue;
-                if (!boarder.checkBoarderSize(rowsValue, columnsValue)) {
-                    JOptionPane.showMessageDialog(null, "Boarder Size should be even");
+                //Map resultMap = boarder.validateBoarderSize(rowsValue,columnsValue);
+                String validationMessage =boarder.validateBoarderSize(rowsValue,columnsValue) ;
+                if ( validationMessage.length()!=0) {
+                    JOptionPane.showMessageDialog(null,validationMessage );
                 } else {
                     //Create a boarder
                     boarder.createBorader(frame, true);
