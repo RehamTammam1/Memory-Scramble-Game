@@ -48,15 +48,18 @@ public class CardsManger {
             panel.add(cardButton);
             int cardNumber = cards[i].getCardNumber();
             int cardValue = cards[i].getCardValue();
+            cardButton.setBackground(new Color(cardValue));
+
 
             cardButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    cardButton.setBackground(new Color(cardValue));
+                    //cardButton.setBackground(new Color(cardValue));
+                    turnonCard(cardButton,cardValue);
+
                 }
             });
         }
-
         turnDownButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,11 +72,20 @@ public class CardsManger {
     }
     public void turnDownCards(JButton[] cardButtons){
         for(JButton cardButton : cardButtons){
-            cardButton.setBackground(Color.white);
+            cardButton.setBackground(null);
             cardButton.setOpaque(true);
             cardButton.setBorderPainted(false);
         }}
+    public void turnonCard(JButton cardButton,int cardValue){
+        if(cardButton.getBackground().getRGB() != cardValue){
+            cardButton.setBackground(new Color(cardValue));
+            // add it to the array and check
+        }else{
+            cardButton.setBackground(null);
+        }
+        //if turnedOnCards == 2 , doon't trun on any colors
 
+    }
     public JButton creatButtonCard(){
         //  Color randomColor = generateRandomColor();
         JButton cardButton = new JButton();
