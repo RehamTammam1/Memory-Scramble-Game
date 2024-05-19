@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,30 +7,31 @@ import java.util.Map;
 
 public class Card {
 
-    private String cardValue ;
-    private String cardView ;
-    // Card Constructor
-    public Card(String cardViewString,String cardValue) {
+    private int cardNumber ;
+    private int cardValue ;// Card Constructor
+    public Card(int cardNumber,int cardValue) {
+        this.cardNumber = cardNumber;
         this.cardValue = cardValue;
-        this.cardView = cardView;
+
     }
-    public String getCardValue() {
-        return cardValue;
-    }
-    // Setter for cardValue
-    public void setCardValue(String cardValue) {
-        this.cardValue = cardValue;
-    }
-    // Getter for cardView
-    public String getCardView() {
-        return cardView;
+    public int getCardNumber() {
+        return cardNumber;
     }
 
     // Setter for cardView
-    public void setCardView(String cardView) {
-        this.cardView = cardView;
+    public void setCardNumber(int cardNumber) {
+        this.cardNumber = cardNumber;
     }
+    public int getCardValue() {
+        return cardValue;
+    }
+    // Setter for cardValue
+    public void setCardValue(int cardValue) {
+        this.cardValue = cardValue;
+    }
+    // Getter for cardView
 
+/*
     ArrayList<JButton> cardList = new ArrayList<>();
     public ArrayList<JButton> createCards (int cardsNumber){
         for(int i=0;i<cardsNumber;i++){
@@ -39,13 +41,10 @@ public class Card {
 
         }
         return cardList;
-    }
+    }*/
+
+
     public void showCard (){
         System.out.println(this.cardValue);
-        System.out.println(this.cardView);
-    }
-
-
-    }
-
-
+        System.out.println(this.cardNumber);
+    }}
