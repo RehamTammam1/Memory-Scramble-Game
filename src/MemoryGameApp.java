@@ -69,8 +69,11 @@ public class MemoryGameApp extends JFrame {
                     //Create a array of cards
                     CardsManger manger = new CardsManger(rowsValue,columnsValue);
                     Card[] cards = manger.createCardsCollection(totalCards);
+                    //assign colors to cards Randomly
+                    manger.assignColorstoCards(cards);
                     //create cards buttons
                     manger.createCardsbuttons(cards,frame);
+
 
                     for (Card card : cards) {
                         System.out.println(card.getCardValue());
