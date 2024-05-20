@@ -2,14 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
+import java.util.*;
 import javax.swing.border.EmptyBorder;
 
 public class CardsManger {
     int padding = 10;
    private int numberOfRows;
    private int numberOfColumns;
-    int numberOfCards;
+    int numberOfCards = this.numberOfRows*this.numberOfColumns;
     RandomColor cardColor = new RandomColor();
     public CardsManger(int numberOfRows,int numberOfColumns){
         this.numberOfRows = numberOfRows;
@@ -19,16 +19,28 @@ public class CardsManger {
     //Create an aray of Cards
     public Card[] createCardsCollection(int numberOfCards){
         Card[] cards = new Card[numberOfCards];
+        Color[] randomColors = cardColor.generateRandomColors(numberOfCards);
         for(int i=0 ; i<numberOfCards;i++) {
-            Color randomColor =  cardColor.generateRandomColor();
-            int colorIdntifier =randomColor.getRGB();
-            Card newCard = new Card(i,colorIdntifier);
-            newCard.setCardNumber(i);
-            newCard.setCardValue(colorIdntifier);
+            Card newCard = new Card(i,0);
             cards[i]=newCard;
         }
         return cards;
     }
+    public Card[] assignColorstoCards(Card[] cards){
+        Color[] randomColors = cardColor.generateRandomColors(this.numberOfRows*this.numberOfColumns);
+        ArrayList<Card> cardsList = new ArrayList<>(Arrays.asList(cards));
+        Collections.shuffle(cardsList);
+        Card[] shuffledCards = cardsList.toArray(new Card[cardsList.size()]);
+        int numberOfCards = cards.length;
+        for (int i=0;i<randomColors.length;i++){
+            shuffledCards[i].setCardValue(randomColors[i].getRGB());
+        }
+        for (int i=0;i<randomColors.length;i++){
+            shuffledCards[i+(numberOfCards/2)].setCardValue(randomColors[i].getRGB());
+        }
+        return shuffledCards;
+    }
+
 
     //Create Cards Buttons
     public JButton[] createCardsbuttons(Card[] cards,JFrame frame){
@@ -42,14 +54,12 @@ public class CardsManger {
         frame.add(panel);
         panel.add(turnDownButton);
         for(int i=0 ; i<cards.length;i++) {
-
             JButton cardButton = creatButtonCard();
             cardButtons[i]=cardButton;
             panel.add(cardButton);
             int cardNumber = cards[i].getCardNumber();
             int cardValue = cards[i].getCardValue();
             cardButton.setBackground(new Color(cardValue));
-
 
             cardButton.addActionListener(new ActionListener() {
                 @Override
