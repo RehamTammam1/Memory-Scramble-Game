@@ -76,7 +76,7 @@ public class MemoryGameApp extends JFrame {
 
 
                     for (Card card : cards) {
-                        System.out.println(card.getCardValue());
+
                     }
 
                     //Create a Timer
