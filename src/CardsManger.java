@@ -92,12 +92,12 @@ public class CardsManger {
             //Compare Cards Values
             int card1Color =this.facedUpCards[0].getCardValue();
             int card2Color =this.facedUpCards[1].getCardValue();
-           System.out.println("comparison value = "+ card1Color+"      "+card2Color);
+
             if(card1Color == card2Color){
-                System.out.println("AL hamdollah");
                 turnonCard(cardButton,cards[cardIndex].getCardValue());
                 facedUpCards[0] = null;
                 facedUpCards[1] = null;
+                freezeButton(facedUpButtons);
                 //facedUpCards.clear();
             }else {
                 // Turn down cards after 1 seconds
@@ -118,10 +118,12 @@ public class CardsManger {
     public void turnDownCards(JButton[] cardButtons){
         for(JButton cardButton : cardButtons){
             cardButton.setBackground(Color.WHITE);
-          //  cardButton.setBackground(null);
             cardButton.setOpaque(true);
             cardButton.setBorderPainted(false);
-        }}
+            cardButton.setEnabled(true);
+        }
+        //set score to 0
+    }
     public void turnonCard(JButton cardButton,int cardValue){
         if(cardButton.getBackground().getRGB() != cardValue){
             cardButton.setBackground(new Color(cardValue));
@@ -130,6 +132,10 @@ public class CardsManger {
             cardButton.setBackground(null);
         }
 
+    }
+    public void freezeButton(JButton[] matchedButtons){
+        matchedButtons[0].setEnabled(false);
+        matchedButtons[1].setEnabled(false);
     }
     public JButton creatButtonCard(){
         //  Color randomColor = generateRandomColor();
