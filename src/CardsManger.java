@@ -12,6 +12,7 @@ public class CardsManger {
     private int numberOfColumns;
     Card[] facedUpCards = new Card[2];
     JButton[] facedUpButtons = new JButton[2];
+    int score = 0;
 
 
     public CardsManger(int numberOfRows,int numberOfColumns){
@@ -55,6 +56,7 @@ public class CardsManger {
    //     frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.add(panel);
         panel.add(turnDownButton);
+        GameController gameController = new GameController();
 
         for(int i=0 ;i<cards.length;i++) {
             JButton cardButton = creatButtonCard();
@@ -65,6 +67,7 @@ public class CardsManger {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     handleButtonClick(cardButton,cards,cardIndex);
+                    gameController.checkSucess(score,(numberOfColumns*numberOfRows)/2,frame,panel);
                 }
             });
         }
@@ -98,7 +101,8 @@ public class CardsManger {
                 facedUpCards[0] = null;
                 facedUpCards[1] = null;
                 freezeButton(facedUpButtons);
-                //facedUpCards.clear();
+                score ++;
+                JOptionPane.showMessageDialog(null, "Bravo Matched Successfully!", "Sucess", JOptionPane.INFORMATION_MESSAGE);
             }else {
                 // Turn down cards after 1 seconds
                 Timer timer = new Timer(1000, new ActionListener() {
@@ -123,6 +127,7 @@ public class CardsManger {
             cardButton.setEnabled(true);
         }
         //set score to 0
+        this.score = 0;
     }
     public void turnonCard(JButton cardButton,int cardValue){
         if(cardButton.getBackground().getRGB() != cardValue){
