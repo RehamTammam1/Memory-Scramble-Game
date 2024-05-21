@@ -5,6 +5,7 @@ public class GameTimer {
 
     Timer gameTimer = new Timer();
     public GameTimer(long delay){
+
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -13,7 +14,9 @@ public class GameTimer {
         };
         gameTimer.schedule(task, delay);
     }
-    //gameTimer.schedulel();
+
+
+
 
 
 }
