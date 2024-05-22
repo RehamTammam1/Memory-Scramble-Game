@@ -105,12 +105,12 @@ public class CardsManger {
                 JOptionPane.showMessageDialog(null, "Bravo Matched Successfully!", "Sucess", JOptionPane.INFORMATION_MESSAGE);
             }else {
                 // Turn down cards after 1 seconds
-                Timer timer = new Timer(1000, new ActionListener() {
+                Timer timer = new Timer(500, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         turnDownCards(facedUpButtons);
                         facedUpCards[0] = null;
                         facedUpCards[1] = null;
-
+                        JOptionPane.showMessageDialog(null, "Give it Another Try!", "Another Try", JOptionPane.INFORMATION_MESSAGE);
                     }
                 });
                 timer.setRepeats(false);
