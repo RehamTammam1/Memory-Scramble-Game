@@ -20,8 +20,12 @@ public class CardsManger {
 
 
     public CardsManger(int numberOfRows,int numberOfColumns){
+
+
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
+
+
 
 
     }
@@ -34,6 +38,29 @@ public class CardsManger {
         }
         return cards;
     }
+    public Timer timeController(int time,JLabel timeLabel){
+        Timer countdownTimer = new Timer(1000, new ActionListener() {
+            int remainingTime = time*60;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (remainingTime > 0) {
+                    remainingTime--;
+                    timeLabel.setText("Remaining time is " + remainingTime + " seconds");
+                    //
+                } else {
+                    if(score != numberOfColumns*numberOfRows/2){
+                        ((Timer) e.getSource()).stop(); // Stop the timer when time reaches 0
+                        JOptionPane.showMessageDialog(null, "Time's up!",
+                                "Game Over", JOptionPane.WARNING_MESSAGE);
+                    }
+                    ;
+                }
+            }
+        });
+        return countdownTimer;
+    }
+
+
 
 
     public Card[] assignColorstoCards(Card[] cards){
@@ -84,24 +111,7 @@ public class CardsManger {
         panel.add(turnDownButton);
 
 
-        Timer countdownTimer = new Timer(1000, new ActionListener() {
-            int remainingTime = time*60;
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (remainingTime > 0) {
-                    remainingTime--;
-                    timeLabel.setText("Remaining time is " + remainingTime + " seconds");
-                    //
-                } else {
-                    if(score != numberOfColumns*numberOfRows/2){
-                        ((Timer) e.getSource()).stop(); // Stop the timer when time reaches 0
-                        JOptionPane.showMessageDialog(null, "Time's up!",
-                                "Game Over", JOptionPane.WARNING_MESSAGE);
-                    }
-                    ;
-                }
-            }
-        });
+        Timer countdownTimer = this.timeController(time,timeLabel);
         countdownTimer.start();
 
 
@@ -113,7 +123,7 @@ public class CardsManger {
             cardButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    handleButtonClick(cardButton,cards,cardIndex);
+                    handleButtonClick(cardButton,cards,cardIndex,countdownTimer);
                     gameController.checkSucess(score,(numberOfColumns*numberOfRows)/2,frame,panel);
                 }
             });
@@ -137,7 +147,7 @@ public class CardsManger {
     }
 
 
-    public void handleButtonClick(JButton cardButton,Card[] cards,int cardIndex){
+    public void handleButtonClick(JButton cardButton,Card[] cards,int cardIndex,Timer countdownTimer){
 
 
         if (this.facedUpCards[0] == null&&this.facedUpCards[1] == null){
@@ -160,9 +170,10 @@ public class CardsManger {
                 freezeButton(facedUpButtons);
                 score ++;
                 JOptionPane.showMessageDialog(null, "Bravo Matched Successfully!", "Sucess", JOptionPane.INFORMATION_MESSAGE);
+                countdownTimer.stop();
             }else {
                 // Turn down cards after 1 seconds
-                Timer timer = new Timer(500, new ActionListener() {
+                Timer timer = new Timer(700, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         turnDownCards(facedUpButtons);
                         facedUpCards[0] = null;
@@ -210,4 +221,6 @@ public class CardsManger {
         return cardButton;
     }
 }
+
+
 
