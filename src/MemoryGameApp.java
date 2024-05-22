@@ -73,12 +73,6 @@ public class MemoryGameApp extends JFrame {
                     manger.assignColorstoCards(cards);
                     //create cards buttons
                     manger.createCardsbuttons(cards,frame);
-
-
-                    for (Card card : cards) {
-
-                    }
-
                     //Create a Timer
                     GameTimer timer = new GameTimer(timerValue);
                 }
