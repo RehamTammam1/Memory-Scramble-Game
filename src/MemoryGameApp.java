@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class MemoryGameApp extends JFrame {
     public static void main(String[] args) {
+
 
         // Memory Game app
         JFrame frame;
@@ -21,14 +23,14 @@ public class MemoryGameApp extends JFrame {
         //Labels
         JLabel columnLabel = new JLabel("Columns");
         JLabel rowLabel = new JLabel("Rows");
-        JLabel timerLabel = new JLabel("Timer");
+        JLabel timerLabel = new JLabel("Time In Minutes");
         JButton enterBtn = new JButton("Enter");
         frame = new JFrame("Welcome to Memory Game");
         //Create a panel
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         frame.setVisible(true);
-        frame.setSize(500, 500);
+        frame.setSize(750, 750);
         frame.add(panel);
         Component[] panelCompments={rowLabel,numberOfrows,columnLabel,numberOfColumns,timerLabel,timerinput,enterBtn};
         for(Component labelComponet : panelCompments){
@@ -55,6 +57,8 @@ public class MemoryGameApp extends JFrame {
                 }
 
 
+
+
                 int rowsValue = Integer.parseInt(rowsInput);
                 int columnsValue = Integer.parseInt(columnsInput);
                 int timerValue = Integer.parseInt(timerinput.getText());
@@ -72,11 +76,14 @@ public class MemoryGameApp extends JFrame {
                     //assign colors to cards Randomly
                     manger.assignColorstoCards(cards);
                     //create cards buttons
-                    manger.createCardsbuttons(cards,frame);
+                    manger.createCardsbuttons(cards,frame,timerValue);
                     //Create a Timer
-                    GameTimer timer = new GameTimer(timerValue);
+                    // GameTimer timer = new GameTimer(timerValue);
                 }
             }
         });
     }
 }
+
+
+
