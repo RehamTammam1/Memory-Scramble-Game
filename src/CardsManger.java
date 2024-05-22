@@ -6,7 +6,9 @@ import java.util.*;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
+
 public class CardsManger {
+
 
     private int numberOfRows;
     private int numberOfColumns;
@@ -15,9 +17,12 @@ public class CardsManger {
     int score = 0;
 
 
+
+
     public CardsManger(int numberOfRows,int numberOfColumns){
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
+
 
     }
     //Create an aray of Cards
@@ -30,12 +35,14 @@ public class CardsManger {
         return cards;
     }
 
+
     public Card[] assignColorstoCards(Card[] cards){
         RandomColor cardColor = new RandomColor();
         Color[] randomColors = cardColor.generateRandomColors(this.numberOfRows*this.numberOfColumns);
         ArrayList<Card> cardsList = new ArrayList<>(Arrays.asList(cards));
         Collections.shuffle(cardsList);
         Card[] shuffledCards = cardsList.toArray(new Card[cardsList.size()]);
+
 
         for (int i=0;i<randomColors.length;i++){
             shuffledCards[i].setCardValue(randomColors[i].getRGB());
@@ -45,18 +52,58 @@ public class CardsManger {
         return shuffledCards;
     }
 
+
     //Create Cards Buttons
-    public JButton[] createCardsbuttons(Card[] cards,JFrame frame){
+    public JButton[] createCardsbuttons(Card[] cards,JFrame frame,int time){
+
+
         JButton[] cardButtons = new JButton[cards.length];
+        GameController gameController = new GameController();
+
+
         JPanel panel = new JPanel();
+        JPanel timePanel = new JPanel();
+        JLabel timeLabel = new JLabel("Remaining time is " + "   " + " seconds");
+
+
+
+
         JButton turnDownButton = new JButton();
         turnDownButton.setText("Trun Down");
-        turnDownButton.setPreferredSize(new Dimension(100,100));
+        turnDownButton.setPreferredSize(new Dimension(50,50));
+
+
         panel.setLayout(new GridLayout(this.numberOfRows,this.numberOfColumns,10,10));
-   //     frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.add(panel);
+        Font font = new Font("Arial", Font.BOLD, 20);
+        timeLabel.setFont(font);
+
+
+        timePanel.setLayout(new BorderLayout());
+        timePanel.add(timeLabel,BorderLayout.NORTH);
+        //  timePanel.add(timeProgressBar,BorderLayout.CENTER);
         panel.add(turnDownButton);
-        GameController gameController = new GameController();
+
+
+        Timer countdownTimer = new Timer(1000, new ActionListener() {
+            int remainingTime = time*60;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (remainingTime > 0) {
+                    remainingTime--;
+                    timeLabel.setText("Remaining time is " + remainingTime + " seconds");
+                    //
+                } else {
+                    if(score != numberOfColumns*numberOfRows/2){
+                        ((Timer) e.getSource()).stop(); // Stop the timer when time reaches 0
+                        JOptionPane.showMessageDialog(null, "Time's up!",
+                                "Game Over", JOptionPane.WARNING_MESSAGE);
+                    }
+                    ;
+                }
+            }
+        });
+        countdownTimer.start();
+
 
         for(int i=0 ;i<cards.length;i++) {
             JButton cardButton = creatButtonCard();
@@ -77,15 +124,24 @@ public class CardsManger {
                 turnDownCards(cardButtons);
             }
         });
+
+
+        frame.setLayout(new BorderLayout());
+        frame.add(timePanel,BorderLayout.EAST);
+        frame.add(panel, BorderLayout.CENTER);
+        frame.add(turnDownButton, BorderLayout.SOUTH);
+        frame.setSize(750, 750);
         frame.revalidate();
         frame.repaint();
         return cardButtons;
     }
 
+
     public void handleButtonClick(JButton cardButton,Card[] cards,int cardIndex){
 
+
         if (this.facedUpCards[0] == null&&this.facedUpCards[1] == null){
-      //      System.out.println("Faced up cards = "+this.facedUpCards.size()+"in case of zero before add");
+            //      System.out.println("Faced up cards = "+this.facedUpCards.size()+"in case of zero before add");
             turnonCard(cardButton,cards[cardIndex].getCardValue());
             this.facedUpCards[0]=cards[cardIndex];
             this.facedUpButtons[0] = cardButton;
@@ -95,6 +151,7 @@ public class CardsManger {
             //Compare Cards Values
             int card1Color =this.facedUpCards[0].getCardValue();
             int card2Color =this.facedUpCards[1].getCardValue();
+
 
             if(card1Color == card2Color){
                 turnonCard(cardButton,cards[cardIndex].getCardValue());
@@ -137,6 +194,7 @@ public class CardsManger {
             cardButton.setBackground(null);
         }
 
+
     }
     public void freezeButton(JButton[] matchedButtons){
         matchedButtons[0].setEnabled(false);
@@ -153,3 +211,4 @@ public class CardsManger {
         return cardButton;
     }
 }
+
