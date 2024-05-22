@@ -167,7 +167,6 @@ public class CardsManger {
                         turnDownCards(facedUpButtons);
                         facedUpCards[0] = null;
                         facedUpCards[1] = null;
-                        JOptionPane.showMessageDialog(null, "Give it Another Try!", "Another Try", JOptionPane.INFORMATION_MESSAGE);
                     }
                 });
                 timer.setRepeats(false);
