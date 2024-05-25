@@ -57,8 +57,6 @@ public class MemoryGameApp extends JFrame {
                 }
 
 
-
-
                 int rowsValue = Integer.parseInt(rowsInput);
                 int columnsValue = Integer.parseInt(columnsInput);
                 int timerValue = Integer.parseInt(timerinput.getText());
@@ -77,8 +75,7 @@ public class MemoryGameApp extends JFrame {
                     manger.assignColorstoCards(cards);
                     //create cards buttons
                     manger.createCardsbuttons(cards,frame,timerValue);
-                    //Create a Timer
-                    // GameTimer timer = new GameTimer(timerValue);
+
                 }
             }
         });
