@@ -60,6 +60,10 @@ public class CardsManger {
         return countdownTimer;
     }
 
+    public void stopTimer (Timer countDownTimer){
+        countDownTimer.stop();
+    }
+
 
 
 
@@ -123,8 +127,8 @@ public class CardsManger {
             cardButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    handleButtonClick(cardButton,cards,cardIndex,countdownTimer);
-                    gameController.checkSucess(score,(numberOfColumns*numberOfRows)/2,frame,panel);
+                    handleButtonClick(cardButton,cards,cardIndex);
+                    gameController.checkSucess(score,(numberOfColumns*numberOfRows)/2,frame,panel,countdownTimer);
                 }
             });
         }
@@ -147,7 +151,7 @@ public class CardsManger {
     }
 
 
-    public void handleButtonClick(JButton cardButton,Card[] cards,int cardIndex,Timer countdownTimer){
+    public void handleButtonClick(JButton cardButton,Card[] cards,int cardIndex){
 
 
         if (this.facedUpCards[0] == null&&this.facedUpCards[1] == null){
@@ -170,7 +174,7 @@ public class CardsManger {
                 freezeButton(facedUpButtons);
                 score ++;
                 JOptionPane.showMessageDialog(null, "Bravo Matched Successfully!", "Sucess", JOptionPane.INFORMATION_MESSAGE);
-                countdownTimer.stop();
+
             }else {
                 // Turn down cards after 1 seconds
                 Timer timer = new Timer(700, new ActionListener() {
