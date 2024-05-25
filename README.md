@@ -65,7 +65,7 @@ git clone https://github.com/RehamTammam1/Memory-Scramble-Game
 
 3. **Set up the run configuration**:
 
-  - For IntelliJ IDEA: Right-click on your main class file (the class containing the `main` method) and select "Run <YourClassName.main()>".
+  - For IntelliJ IDEA: Right-click on your main class file (the class containing the `main` method) and select "Run MemoryGameApp.main()".
   - For Eclipse: Right-click on your main class file, go to "Run As" and select "Java Application".
   - For NetBeans: Right-click on your project, select "Run" and then "Run Project".
 
@@ -79,9 +79,10 @@ You can view and contribute to our issue tracker [here](https://github.com/Reham
 
 ### Reported Issues
 
-- Issue 1: [Description of the issue or bug](link_to_issue)
-- Issue 2: [Description of the issue or bug](link_to_issue)
-
+- **Issue 1:The Timer Stops when the user matches two cards, even if all cards haven't been matched** 
+https://github.com/RehamTammam1/Memory-Scramble-Game/issues/2
+- **Issue 2: Cards appear with hovering over the frame** https://github.com/RehamTammam1/Memory-Scramble-Game/issues/3
+- **Issue 3: Game Cards Still Clickable , when Time finishes without matching any cards** https://github.com/RehamTammam1/Memory-Scramble-Game/issues/4
 ### Feature Requests
 
 If you have any feature requests or suggestions for improving the Memory Scramble Game, please let us know by opening a new issue with the "Feature Request" label in our issue tracker.
